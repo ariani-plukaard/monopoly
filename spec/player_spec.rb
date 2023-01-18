@@ -1,7 +1,8 @@
 require "player"
 
 describe Player do
-  let(:player) { Player.new(name: "Test Name") }
+  let(:player) { Player.new }
+
   describe "#update_money" do
     context "given integer 1" do
       it "returns the player's money with 1 added" do
@@ -14,6 +15,7 @@ describe Player do
       end
     end
   end
+
   describe "#update_position" do
     context "given the roll 3 and board length 9 (starting from position 0)" do
       it "returns the players position moved 3 spaces" do
@@ -26,7 +28,7 @@ describe Player do
       end
     end
     context "given the roll 13 and board length 6 (starting from position 2)" do
-      let(:player) { Player.new(name:"Test Name", position: 2) }
+      let(:player) { Player.new(position: 2) }
       it "returns the players position moved 13 spaces - board wraps around more than once" do
         expect(player.update_position(13, 6)).to eq(3)
       end
