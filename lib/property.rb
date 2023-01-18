@@ -8,4 +8,8 @@ class Property
     @price = attributes[:price]
     @owner = attributes[:owner]
   end
+
+  def add_owner(owner)
+    @owner = owner
+  end
 end
