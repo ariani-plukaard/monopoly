@@ -1,9 +1,10 @@
-class Property
-  attr_reader :name, :type, :colour, :price, :owner
+require 'board_space'
+
+class Property < BoardSpace
+  attr_reader :colour, :price, :owner
 
   def initialize(attributes = {})
-    @name = attributes[:name]
-    @type = attributes[:type]
+    super(name: attributes[:name])
     @colour = attributes[:colour]
     @price = attributes[:price]
     @owner = attributes[:owner]

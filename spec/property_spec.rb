@@ -2,11 +2,11 @@ require 'property'
 require 'player'
 
 describe Property do
-  let(:property) { Property.new(name: 'Test', type: 'property', colour: 'Blue', price: 4) }
+  let(:property) { Property.new(name: 'Test', colour: 'Blue', price: 4) }
 
   context 'instance initialized with property details' do
     it 'has the correct attributes: name, type, colour and price' do
-      expect(property).to have_attributes(name: 'Test', type: 'property', colour: 'Blue', price: 4)
+      expect(property).to have_attributes(name: 'Test', colour: 'Blue', price: 4)
     end
   end
   context 'instance initialized with no owner' do
