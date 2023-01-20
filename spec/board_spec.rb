@@ -51,18 +51,18 @@ describe Board do
   describe '#make_turn' do
     context "it's player1's turn and they were on position 2" do
       let(:player1) { {name:'Player1', position: 2} }
-      context 'given player1 has rolled a 3' do
-        it "updates player1's position to 0 (Go)" do
+      context 'given player1 rolled a 3' do
+        it "update player1's position to 0 (Go)" do
           board.make_turn(3)
           expect(board.players[0].position).to eq(0)
         end
-        it "adds 1 to player1's money for passing Go" do
+        it "add 1 to player1's money for passing Go" do
           board.make_turn(3)
           expect(board.players[0].money).to eq(17)
         end
       end
 
-      context 'given player1 has rolled a 2' do
+      context 'given player1 rolled a 2' do
         it "updates player1's position to 4" do
           board.make_turn(2)
           expect(board.players[0].position).to eq(4)
