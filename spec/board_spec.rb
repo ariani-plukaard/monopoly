@@ -50,17 +50,25 @@ describe Board do
   describe '#move_player' do
     let(:players_array) { [{name:'Player1', position: 2}, {name: 'Player2'}, {name: 'Player3'}] }
     let(:board) { Board.new(board_string, players_array) }
-    context 'given Player1 (board.players[0]) was on position 2 and the roll is 3' do
-      it "updates Player1 position to 0 (Go)" do
-        expect(board.move_player(0, 3)).to eq(0)
+    context 'given Player1 (board.players[0]) has rolled a 3 (and was on position 2)' do
+      it "updates Player1's position to 0 (Go)" do
+        board.move_player(0, 3)
+        expect(board.players[0].position).to eq(0)
       end
-      it "adds 1 to Player1 money for passing Go" do
+      it "adds 1 to Player1's money for passing Go" do
         board.move_player(0, 3)
         expect(board.players[0].money).to eq(17)
       end
     end
-    context 'given player passed go' do
-
+    context 'given Player1 (board.players[0]) has rolled a 2 (and was on position 2)' do
+      it "updates Player1's position to 4" do
+        board.move_player(0, 2)
+        expect(board.players[0].position).to eq(4)
+      end
+      it "no change to Player1's money (did not pass Go)" do
+        board.move_player(0, 2)
+        expect(board.players[0].money).to eq(16)
+      end
     end
   end
 end

@@ -10,7 +10,17 @@ class Board
     @players = load_players(players_array)
   end
 
+  def move_player(player_index, roll)
+    previous_position = @players[player_index].position
+    new_position = @players[player_index].update_position(roll, @board_spaces.length)
+    @players[player_index].update_money(1) if passed_go?(previous_position, new_position)
+  end
+
   private
+
+  def passed_go?(previous_position, new_position)
+    new_position < previous_position
+  end
 
   def load_players(players_array)
     players_array.map { |player| Player.new(player) }
