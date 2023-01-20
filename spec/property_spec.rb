@@ -5,7 +5,7 @@ describe Property do
   let(:property) { Property.new(name: 'Test', colour: 'Blue', price: 4) }
 
   context 'instance initialized with property details' do
-    it 'has the correct attributes: name, type, colour and price' do
+    it 'has the correct attributes: name, colour and price' do
       expect(property).to have_attributes(name: 'Test', colour: 'Blue', price: 4)
     end
   end

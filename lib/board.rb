@@ -8,12 +8,13 @@ class Board
   def initialize(board_string, players_array)
     @board_spaces = load_spaces(board_string)
     @players = load_players(players_array)
+    @active_player_index = 0
   end
 
-  def move_player(player_index, roll)
-    previous_position = @players[player_index].position
-    new_position = @players[player_index].update_position(roll, @board_spaces.length)
-    @players[player_index].update_money(1) if passed_go?(previous_position, new_position)
+  def make_turn(roll)
+    previous_position = @players[@active_player_index].position
+    new_position = @players[@active_player_index].update_position(roll, @board_spaces.length)
+    @players[@active_player_index].update_money(1) if passed_go?(previous_position, new_position)
   end
 
   private
