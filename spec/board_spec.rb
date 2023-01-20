@@ -49,7 +49,7 @@ describe Board do
   end
 
   describe '#make_turn' do
-    context "given it's player1's turn and they were on position 2" do
+    context "it's player1's turn and they were on position 2" do
       let(:player1) { {name:'Player1', position: 2} }
       context 'given player1 has rolled a 3' do
         it "updates player1's position to 0 (Go)" do
@@ -66,20 +66,23 @@ describe Board do
           board.make_turn(2)
           expect(board.players[0].position).to eq(4)
         end
-        it "no change to player1's money (did not pass Go)" do
-          board.make_turn(2)
-          expect(board.players[0].money).to eq(16)
+        context 'given player1 already owns the property at position 4' do
+          it "no change to player1's money (not pass Go)" do
+            board.board_spaces[4].add_owner(board.players[0])
+            board.make_turn(2)
+            expect(board.players[0].money).to eq(16)
+          end
         end
       end
     end
 
-    context "given it's player1's turn and they were on position 0" do
-      context 'given player1 has rolled a 2' do
+    context "it's player1's turn and they were on position 0" do
+      context 'given player1 has rolled a 2 (not pass go)' do
         let(:have_turn) { board.make_turn(2) }
         context 'given the property is not owned' do
           it 'updates owner of the property to be player1' do
             have_turn
-            expect(board.board_spaces[2].owner).to eq(player1)
+            expect(board.board_spaces[2].owner).to eq(board.players[0])
           end
           it "subtracts 2, the cost of the property, from player1's money" do
             have_turn

@@ -15,12 +15,21 @@ class Board
     previous_position = @players[@active_player_index].position
     new_position = @players[@active_player_index].update_position(roll, @board_spaces.length)
     @players[@active_player_index].update_money(1) if passed_go?(previous_position, new_position)
+    turn_property_action(new_position)
   end
 
   private
 
   def passed_go?(previous_position, new_position)
     new_position < previous_position
+  end
+
+  def turn_property_action(position)
+    on_go = @board_spaces[position].instance_of?(Go)
+    if !on_go && !@board_spaces[position].owner
+      @board_spaces[position].add_owner(@players[@active_player_index])
+      @players[@active_player_index].update_money(-@board_spaces[position].price)
+    end
   end
 
   def load_players(players_array)
