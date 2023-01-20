@@ -13,7 +13,7 @@ class Board
   private
 
   def load_players(players_array)
-    players_array.map { |player| Player.new(name: player) }
+    players_array.map { |player| Player.new(player) }
   end
 
   def load_spaces(board_string)

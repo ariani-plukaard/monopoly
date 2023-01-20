@@ -15,7 +15,7 @@ describe Property do
     end
   end
 
-  describe '#set_owner' do
+  describe '#add_owner' do
     context 'given a player' do
       let(:owner) { Player.new }
       it 'returns player as the owner of the property' do

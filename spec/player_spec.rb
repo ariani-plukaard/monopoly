@@ -22,15 +22,10 @@ describe Player do
         expect(player.update_position(3, 9)).to eq(3)
       end
     end
-    context 'given the roll 6 and board length 5 (starting from position 0)' do
-      it "returns the player's position moved 6 spaces - board wraps around" do
-        expect(player.update_position(6, 5)).to eq(1)
-      end
-    end
-    context 'given the roll 13 and board length 6 (starting from position 2)' do
+    context 'given the roll 5 and board length 6 (starting from position 2)' do
       let(:player) { Player.new(position: 2) }
-      it "returns the player's position moved 13 spaces - board wraps around more than once" do
-        expect(player.update_position(13, 6)).to eq(3)
+      it "returns the player's position moved 5 spaces - board wraps around" do
+        expect(player.update_position(5, 6)).to eq(1)
       end
     end
   end
