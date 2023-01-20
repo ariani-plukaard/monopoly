@@ -1,26 +1,29 @@
 require 'board'
-require 'property'
+require 'board_space'
 require 'player'
 
 describe Board do
-  let(:properties_string) {"[
-    {
-      'name': 'GO',
-      'type': 'go'
-    },
-    {
-      'name': 'The Burvale',
-      'price': 1,
-      'colour': 'Brown',
-      'type': 'property'
-    }
-  ]"}
-  let(:players_array) { ['Player1', 'Player2'] }
-  let(:board) { Board.new(properties_string, players_array) }
+  let(:board_string) do
+    JSON.generate([
+      {
+        name: 'GO',
+        type: 'go'
+      },
+      {
+        name: 'The Burvale',
+        price: 1,
+        colour: 'Brown',
+        type: 'property'
+      }
+    ])
+  end
 
-  context 'instance initialized with players and properties' do
-    it 'has array of properties' do
-      expect(board.properties).to all(be_a(Property))
+  let(:players_array) { ['Player1', 'Player2'] }
+  let(:board) { Board.new(board_string, players_array) }
+
+  context 'instance initialized with players and board spaces' do
+    it 'has array of properties (& go)' do
+      expect(board.board_spaces).to all(be_a(BoardSpace))
     end
     it 'has array of players' do
       expect(board.players).to all(be_a(Player))
