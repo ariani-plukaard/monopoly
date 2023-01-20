@@ -3,6 +3,13 @@ require 'player'
 describe Player do
   let(:player) { Player.new }
 
+  context 'instance initialized using the name Test Player and default money and position' do
+    let(:player) { Player.new(name: 'Test Player') }
+    it 'has the correct starting attributes: name, money (16) and position (0)' do
+      expect(player).to have_attributes(name: 'Test Player', money: 16, position: 0)
+    end
+  end
+
   describe '#update_money' do
     context 'given integer 1' do
       it "returns the player's money with 1 added" do

@@ -72,6 +72,23 @@ describe Board do
         end
       end
     end
+
+    context "given it's player1's turn and they were on position 0" do
+      context 'given player1 has rolled a 2' do
+        let(:have_turn) { board.make_turn(2) }
+        context 'given the property is not owned' do
+          it 'updates owner of the property to be player1' do
+            have_turn
+            expect(board.board_spaces[2].owner).to eq(player1)
+          end
+          it "subtracts 2, the cost of the property, from player1's money" do
+            have_turn
+            expect(board.players[0].money).to eq(14)
+          end
+        end
+      end
+
+    end
   end
 
   # describe '#double_rent?' do
