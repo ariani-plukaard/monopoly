@@ -61,6 +61,7 @@ describe Board do
           expect(board.players[0].money).to eq(17)
         end
       end
+
       context 'given player1 has rolled a 2' do
         it "updates player1's position to 4" do
           board.make_turn(2)
@@ -77,7 +78,7 @@ describe Board do
     end
 
     context "it's player1's turn and they were on position 0" do
-      context 'given player1 has rolled a 2 (not pass go)' do
+      context 'given player1 rolls and moves to position 2 (not pass go)' do
         let(:have_turn) { board.make_turn(2) }
         context 'given the property is not owned' do
           it 'updates owner of the property to be player1' do
@@ -89,27 +90,39 @@ describe Board do
             expect(board.players[0].money).to eq(14)
           end
         end
-      end
 
+        context 'given this property is owned by player2' do
+          let(:player2_owns_property2) { board.board_spaces[2].add_owner(board.players[1]) }
+          it 'makes no change to the property ownership' do
+            player2_owns_property2
+            have_turn
+            expect(board.board_spaces[2].owner).to eq(board.players[1])
+          end
+          context 'when all properties of this blue colour are owned by player2' do
+            it "subtracts 4, double the cost of the property, from player1's money as rent" do
+              board.board_spaces[1].add_owner(board.players[1])
+              player2_owns_property2
+              have_turn
+              expect(board.players[0].money).to eq(12)
+            end
+          end
+          context 'when the other property of this blue colour is owned by player3' do
+            it "subtracts 2, the cost of the property, from player1's money as rent" do
+              board.board_spaces[1].add_owner(board.players[2])
+              player2_owns_property2
+              have_turn
+              expect(board.players[0].money).to eq(14)
+            end
+          end
+          context 'when not all properties of this blue colour are owned' do
+            it "subtracts 2, the cost of the property, from player1's money as rent" do
+              player2_owns_property2
+              have_turn
+              expect(board.players[0].money).to eq(14)
+            end
+          end
+        end
+      end
     end
   end
-
-  # describe '#double_rent?' do
-  #   context 'all blue properties are owned by the same owner' do
-  #     board.board_spaces[1].add_owner(board)
-  #     it 'returns true' do
-
-  #     end
-  #   end
-  #   context 'blue properties are owned by different owners' do
-  #     it 'returns false' do
-
-  #     end
-  #   end
-  #   context 'not all blue properties are owned' do
-  #     it 'returns false' do
-
-  #     end
-  #   end
-  # end
 end
