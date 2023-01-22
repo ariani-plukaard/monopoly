@@ -35,8 +35,10 @@ describe Board do
       }
     ])
   end
-  let(:players_array) { [player1, {name: 'Player2'}, {name: 'Player3'}] }
+  let(:players_array) { [player1, player2, player3] }
   let(:player1) { {name:'Player1'} }
+  let(:player2) { {name:'Player2'} }
+  let(:player3) { {name:'Player3'} }
   let(:board) { Board.new(board_string, players_array) }
 
   context 'instance initialized with players and board spaces' do
@@ -160,6 +162,33 @@ describe Board do
           board.next_player
           expect(board.next_player).to eq(board.players[0])
         end
+      end
+    end
+  end
+
+  describe '#results' do
+    context 'player1 is bankrupt and player2 has the most money' do
+      let(:player1) { {name:'Player1', money: -1, position: 1} }
+      let(:player2) { {name:'Player2', money: 30, position: 3} }
+      let(:player3) { {name:'Player3', money: 15, position: 0} }
+      it 'returns results with player2 as the winner, followed by player3 and player1' do
+        expect(board.results).to eq([
+          {
+            player: "Player2",
+            money: 30,
+            final_position: "Myer"
+          },
+          {
+            player: "Player3",
+            money: 15,
+            final_position: "GO"
+          },
+          {
+            player: "Player1",
+            money: -1,
+            final_position: "Kmart"
+          }
+        ])
       end
     end
   end

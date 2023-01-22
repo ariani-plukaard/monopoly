@@ -26,6 +26,17 @@ class Board
     @active_player = @players[active_player_index]
   end
 
+  def results
+    results = @players.sort_by(&:money).reverse
+    results.map do |player|
+      {
+        player: player.name,
+        money: player.money,
+        final_position: @board_spaces[player.position].name
+      }
+    end
+  end
+
   private
 
   def passed_go?(previous_position, new_position)
