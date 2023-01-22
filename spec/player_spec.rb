@@ -41,22 +41,22 @@ describe Player do
     end
   end
 
-  describe '#is_bankrupt?' do
+  describe '#bankrupt?' do
     context "player's money is positive" do
       it 'returns false - not bankrupt' do
-        expect(player.is_bankrupt?).to eq(false)
+        expect(player.bankrupt?).to eq(false)
       end
     end
     context "player's money is 0" do
-      player.update_money(-16)
+      let(:player) { Player.new(money: 0) }
       it 'returns false - not bankrupt' do
-        expect(player.is_bankrupt?).to eq(false)
+        expect(player.bankrupt?).to eq(false)
       end
     end
     context "player's money is negative" do
-      player.update_money(-17)
+      let(:player) { Player.new(money: -1) }
       it 'returns true - is bankrupt' do
-        expect(player.is_bankrupt?).to eq(true)
+        expect(player.bankrupt?).to eq(true)
       end
     end
   end

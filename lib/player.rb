@@ -14,4 +14,8 @@ class Player
   def update_position(roll, board_length)
     @position = (@position + roll) % board_length
   end
+
+  def bankrupt?
+    @money.negative?
+  end
 end
