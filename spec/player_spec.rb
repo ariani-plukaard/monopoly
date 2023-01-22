@@ -40,4 +40,24 @@ describe Player do
       end
     end
   end
+
+  describe '#is_bankrupt?' do
+    context "player's money is positive" do
+      it 'returns false - not bankrupt' do
+        expect(player.is_bankrupt?).to eq(false)
+      end
+    end
+    context "player's money is 0" do
+      player.update_money(-16)
+      it 'returns false - not bankrupt' do
+        expect(player.is_bankrupt?).to eq(false)
+      end
+    end
+    context "player's money is negative" do
+      player.update_money(-17)
+      it 'returns true - is bankrupt' do
+        expect(player.is_bankrupt?).to eq(true)
+      end
+    end
+  end
 end
