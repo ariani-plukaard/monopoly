@@ -151,14 +151,14 @@ describe Board do
     context 'there are 3 players starting with player1' do
       context 'the active player was player1' do
         it 'the next player is player2' do
-          expect(board.next_player).to eq(players[1])
+          expect(board.next_player).to eq(board.players[1])
         end
       end
       context 'the active player was player3' do
         it 'the next player is player1' do
           board.next_player
           board.next_player
-          expect(board.next_player).to eq(players[0])
+          expect(board.next_player).to eq(board.players[0])
         end
       end
     end
