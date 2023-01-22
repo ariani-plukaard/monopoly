@@ -98,20 +98,36 @@ describe Board do
             have_turn
             expect(board.board_spaces[2].owner).to eq(board.players[1])
           end
+
           context 'when all properties of this blue colour are owned by player2' do
+            let(:player2_owns_property1) { board.board_spaces[1].add_owner(board.players[1]) }
             it "subtracts 4, double the cost of the property, from player1's money as rent" do
-              board.board_spaces[1].add_owner(board.players[1])
+              player2_owns_property1
               player2_owns_property2
               have_turn
               expect(board.players[0].money).to eq(12)
             end
+            it "adds the rent to player2's money" do
+              player2_owns_property1
+              player2_owns_property2
+              have_turn
+              expect(board.players[1].money).to eq(20)
+            end
           end
+
           context 'when the other property of this blue colour is owned by player3' do
+            let(:player3_owns_property1) { board.board_spaces[1].add_owner(board.players[2]) }
             it "subtracts 2, the cost of the property, from player1's money as rent" do
-              board.board_spaces[1].add_owner(board.players[2])
+              player3_owns_property1
               player2_owns_property2
               have_turn
               expect(board.players[0].money).to eq(14)
+            end
+            it "adds the rent to player2's money" do
+              player3_owns_property1
+              player2_owns_property2
+              have_turn
+              expect(board.players[1].money).to eq(18)
             end
           end
           context 'when not all properties of this blue colour are owned' do
@@ -120,9 +136,17 @@ describe Board do
               have_turn
               expect(board.players[0].money).to eq(14)
             end
+            it "adds the rent to player2's money" do
+              player2_owns_property2
+              have_turn
+              expect(board.players[1].money).to eq(18)
+            end
           end
         end
       end
+    end
+    context 'if' do
+
     end
   end
 end

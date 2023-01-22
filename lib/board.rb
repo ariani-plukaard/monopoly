@@ -3,49 +3,51 @@ require 'go'
 require 'property'
 
 class Board
-  attr_reader :board_spaces, :players, :active_player_index
+  attr_reader :board_spaces, :players, :active_player
 
   def initialize(board_string, players_array)
     @board_spaces = load_spaces(board_string)
     @players = load_players(players_array)
-    @active_player_index = 0
+    @active_player = @players[0]
+    @active_space = @board_spaces[@active_player.position]
   end
 
   def make_turn(roll)
-    previous_position = @players[@active_player_index].position
-    new_position = @players[@active_player_index].update_position(roll, @board_spaces.length)
-    @players[@active_player_index].update_money(1) if passed_go?(previous_position, new_position)
-    property_action(new_position)
+    previous_position = @active_player.position
+    @active_player.update_position(roll, @board_spaces.length)
+    @active_space = @board_spaces[@active_player.position]
+    @active_player.update_money(1) if passed_go?(previous_position)
+    property_action
   end
 
   private
 
-  def passed_go?(previous_position, new_position)
-    new_position < previous_position
+  def passed_go?(previous_position)
+    @active_player.position < previous_position
   end
 
-  def property_action(position)
-    on_go = @board_spaces[position].instance_of?(Go)
-    property_not_owned = !on_go && @board_spaces[position].owner.nil?
-    active_player_not_owner = !on_go && @board_spaces[position].owner != @players[@active_player_index]
-    if !on_go && property_not_owned
-      buy_property(position)
-    elsif !on_go && active_player_not_owner
-      pay_rent(position)
+  def property_action
+    not_on_go = !@active_space.instance_of?(Go)
+    property_not_owned = not_on_go && @active_space.owner.nil?
+    active_player_not_owner = not_on_go && @active_space.owner != @active_player
+    if not_on_go && property_not_owned
+      buy_property
+    elsif not_on_go && active_player_not_owner
+      pay_rent
     end
   end
 
-  def pay_rent(position)
-    colour = @board_spaces[position].colour
-    colour_group = @board_spaces.select { |space| space.instance_of?(Property) && space.colour == colour }
+  def pay_rent
+    colour_group = @board_spaces.select { |space| space.instance_of?(Property) && space.colour == @active_space.colour }
     owners = colour_group.map(&:owner)
-    rent_size = owners.uniq.length == 1 ? 2 : 1
-    @players[@active_player_index].update_money(-(rent_size * @board_spaces[position].price))
+    rent_size = owners.uniq.length == 1 ? 2 * @active_space.price : @active_space.price
+    @active_player.update_money(-rent_size)
+    @active_space.owner.update_money(rent_size)
   end
 
-  def buy_property(position)
-    @board_spaces[position].add_owner(@players[@active_player_index])
-    @players[@active_player_index].update_money(-@board_spaces[position].price)
+  def buy_property
+    @active_space.add_owner(@active_player)
+    @active_player.update_money(-@active_space.price)
   end
 
   def load_players(players_array)
