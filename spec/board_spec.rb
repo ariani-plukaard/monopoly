@@ -63,12 +63,12 @@ describe Board do
       end
 
       context 'given player1 rolled a 2' do
-        it "updates player1's position to 4" do
+        it "updates player1's position to 4 (not pass Go)" do
           board.make_turn(2)
           expect(board.players[0].position).to eq(4)
         end
         context 'given player1 already owns the property at position 4' do
-          it "no change to player1's money (not pass Go)" do
+          it "no change to player1's money" do
             board.board_spaces[4].add_owner(board.players[0])
             board.make_turn(2)
             expect(board.players[0].money).to eq(16)
@@ -145,8 +145,22 @@ describe Board do
         end
       end
     end
-    context 'if' do
+  end
 
+  describe '#next_player' do
+    context 'there are 3 players starting with player1' do
+      context 'the active player was player1' do
+        it 'the next player is player2' do
+          expect(board.next_player).to eq(players[1])
+        end
+      end
+      context 'the active player was player3' do
+        it 'the next player is player1' do
+          board.next_player
+          board.next_player
+          expect(board.next_player).to eq(players[0])
+        end
+      end
     end
   end
 end

@@ -3,7 +3,7 @@ require 'go'
 require 'property'
 
 class Board
-  attr_reader :board_spaces, :players, :active_player
+  attr_reader :board_spaces, :players
 
   def initialize(board_string, players_array)
     @board_spaces = load_spaces(board_string)
@@ -14,16 +14,16 @@ class Board
 
   def make_turn(roll)
     previous_position = @active_player.position
-    @active_player.update_position(roll, @board_spaces.length)
-    @active_space = @board_spaces[@active_player.position]
-    @active_player.update_money(1) if passed_go?(previous_position)
+    new_position = @active_player.update_position(roll, @board_spaces.length)
+    @active_space = @board_spaces[new_position]
+    @active_player.update_money(1) if passed_go?(previous_position, new_position)
     property_action
   end
 
   private
 
-  def passed_go?(previous_position)
-    @active_player.position < previous_position
+  def passed_go?(previous_position, new_position)
+    new_position < previous_position
   end
 
   def property_action
