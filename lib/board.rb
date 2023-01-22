@@ -3,7 +3,7 @@ require 'go'
 require 'property'
 
 class Board
-  attr_reader :board_spaces, :players
+  attr_reader :board_spaces, :players, :active_player_index
 
   def initialize(board_string, players_array)
     @board_spaces = load_spaces(board_string)
@@ -26,10 +26,11 @@ class Board
 
   def property_action(position)
     on_go = @board_spaces[position].instance_of?(Go)
-    players_own_property = !on_go && @board_spaces[position].owner == @players[@active_player_index]
-    if !on_go && !@board_spaces[position].owner
+    property_not_owned = !on_go && @board_spaces[position].owner.nil?
+    active_player_not_owner = !on_go && @board_spaces[position].owner != @players[@active_player_index]
+    if !on_go && property_not_owned
       buy_property(position)
-    elsif !on_go && !players_own_property
+    elsif !on_go && active_player_not_owner
       pay_rent(position)
     end
   end
