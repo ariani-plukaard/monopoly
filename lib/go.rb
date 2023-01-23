@@ -1,4 +1,4 @@
-require 'board_space'
+require_relative 'board_space'
 
 class Go < BoardSpace
 

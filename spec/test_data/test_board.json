@@ -1,0 +1,30 @@
+[
+  {
+    "name": "GO",
+    "type": "go"
+  },
+  {
+    "name": "Kmart",
+    "price": 1,
+    "colour": "Blue",
+    "type": "property"
+  },
+  {
+    "name": "Big W",
+    "price": 2,
+    "colour": "Blue",
+    "type": "property"
+  },
+  {
+    "name": "Myer",
+    "price": 3,
+    "colour": "Green",
+    "type": "property"
+  },
+  {
+    "name": "David Jones",
+    "price": 4,
+    "colour": "Green",
+    "type": "property"
+  }
+]

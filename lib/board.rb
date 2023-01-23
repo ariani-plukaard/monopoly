@@ -1,9 +1,10 @@
 require 'json'
-require 'go'
-require 'property'
+require_relative 'go'
+require_relative 'property'
+require_relative 'player'
 
 class Board
-  attr_reader :board_spaces, :players
+  attr_reader :board_spaces, :players, :active_player
 
   def initialize(board_string, players_array)
     @board_spaces = load_spaces(board_string)
