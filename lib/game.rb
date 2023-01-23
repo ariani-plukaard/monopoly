@@ -37,6 +37,3 @@ rolls_file = ARGV[0]
 players = [{ name: 'Peter' }, { name: 'Billy' }, { name: 'Charlotte' }, { name: 'Sweedal' }]
 
 run_game(rolls_file, players)
-
-# board_spaces_file = 'board.json'
-# serialized_board_spaces = File.read(board_spaces_file)

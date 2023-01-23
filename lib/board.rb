@@ -23,7 +23,7 @@ class Board
 
   def next_player
     previous_player_index = @players.index(@active_player)
-    active_player_index = previous_player_index == @players.length - 1 ? 0 : previous_player_index + 1
+    active_player_index = previous_player_index == (@players.length - 1) ? 0 : previous_player_index + 1
     @active_player = @players[active_player_index]
   end
 

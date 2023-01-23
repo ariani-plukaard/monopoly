@@ -4,41 +4,43 @@ require 'player'
 
 describe Board do
   let(:board_string) do
-    JSON.generate([
-      {
-        name: 'GO',
-        type: 'go'
-      },
-      {
-        name: 'Kmart',
-        price: 1,
-        colour: 'Blue',
-        type: 'property'
-      },
-      {
-        name: 'Big W',
-        price: 2,
-        colour: 'Blue',
-        type: 'property'
-      },
-      {
-        name: 'Myer',
-        price: 3,
-        colour: 'Green',
-        type: 'property'
-      },
-      {
-        name: 'David Jones',
-        price: 4,
-        colour: 'Green',
-        type: 'property'
-      }
-    ])
+    JSON.generate(
+      [
+        {
+          name: 'GO',
+          type: 'go'
+        },
+        {
+          name: 'Kmart',
+          price: 1,
+          colour: 'Blue',
+          type: 'property'
+        },
+        {
+          name: 'Big W',
+          price: 2,
+          colour: 'Blue',
+          type: 'property'
+        },
+        {
+          name: 'Myer',
+          price: 3,
+          colour: 'Green',
+          type: 'property'
+        },
+        {
+          name: 'David Jones',
+          price: 4,
+          colour: 'Green',
+          type: 'property'
+        }
+      ]
+    )
   end
   let(:players_array) { [player1, player2, player3] }
-  let(:player1) { {name:'Player1'} }
-  let(:player2) { {name:'Player2'} }
-  let(:player3) { {name:'Player3'} }
+  let(:player1) { { name: 'Player1' } }
+  let(:player2) { { name: 'Player2' } }
+  let(:player3) { { name: 'Player3' } }
   let(:board) { Board.new(board_string, players_array) }
 
   context 'instance initialized with players and board spaces' do
@@ -52,7 +54,7 @@ describe Board do
 
   describe '#make_turn' do
     context "it's player1's turn and they were on position 2" do
-      let(:player1) { {name:'Player1', position: 2} }
+      let(:player1) { { name: 'Player1', position: 2 } }
       context 'given player1 rolled a 3' do
         it "update player1's position to 0 (Go)" do
           board.make_turn(3)
@@ -168,27 +170,29 @@ describe Board do
 
   describe '#results' do
     context 'player1 is bankrupt and player2 has the most money' do
-      let(:player1) { {name:'Player1', money: -1, position: 1} }
-      let(:player2) { {name:'Player2', money: 30, position: 3} }
-      let(:player3) { {name:'Player3', money: 15, position: 0} }
+      let(:player1) { { name: 'Player1', money: -1, position: 1 } }
+      let(:player2) { { name: 'Player2', money: 30, position: 3 } }
+      let(:player3) { { name: 'Player3', money: 15, position: 0 } }
       it 'returns results with player2 as the winner, followed by player3 and player1' do
-        expect(board.results).to eq([
-          {
-            player: "Player2",
-            money: 30,
-            final_position: "Myer"
-          },
-          {
-            player: "Player3",
-            money: 15,
-            final_position: "GO"
-          },
-          {
-            player: "Player1",
-            money: -1,
-            final_position: "Kmart"
-          }
-        ])
+        expect(board.results).to eq(
+          [
+            {
+              player: 'Player2',
+              money: 30,
+              final_position: 'Myer'
+            },
+            {
+              player: 'Player3',
+              money: 15,
+              final_position: 'GO'
+            },
+            {
+              player: 'Player1',
+              money: -1,
+              final_position: 'Kmart'
+            }
+          ]
+        )
       end
     end
   end
