@@ -1,5 +1,5 @@
-## Woven Monopoly
-Command-line app for Woven coding test - Prepared by Ariani Plukaard
+## Monopoly
+Command-line app for a coding test - Prepared by Ariani Plukaard
 
 ### Installation Instructions
 * This program was developed using Ruby version 3.1.2.
