@@ -1,6 +1,4 @@
-Your task is to write an application to play the game of Monopoly.
-
-In this Monopoly, when the dice rolls are set ahead of time, the game is deterministic.
+In this Monopoly game, when the dice rolls are set ahead of time, the game is deterministic.
 
 ### Game rules
 * There are four players who take turns in the following order:
@@ -19,7 +17,7 @@ In this Monopoly, when the dice rolls are set ahead of time, the game is determi
 * The board wraps around (i.e. you get to the last space, the next space is the first space)
 
 
-### Your task
+### Task of the Application
 * Load in the board from board.json
 * Implement game logic as per the rules
 * Load in the given dice rolls files and simulate the game
