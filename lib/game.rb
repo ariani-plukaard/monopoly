@@ -8,12 +8,12 @@ def read_rolls(rolls_file)
 end
 
 def print_results(board)
-  puts '------------------------------------'
+  puts '---------------------------------------------------------'
   board.results.each_with_index do |result, index|
     print 'WINNER: ' if index.zero?
     puts "#{result[:player]} has $#{result[:money]} and finished the game on #{result[:final_position]}"
   end
-  puts '------------------------------------'
+  puts '---------------------------------------------------------'
 end
 
 def simulate_game(rolls, board_string, players)
