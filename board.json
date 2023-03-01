@@ -4,51 +4,51 @@
     "type": "go"
   },
   {
-    "name": "The Burvale",
+    "name": "Domino's",
     "price": 1,
-    "colour": "Brown",
+    "colour": "Lilac",
     "type": "property"
   },
   {
-    "name": "Fast Kebabs",
+    "name": "Pizza Hut",
     "price": 1,
-    "colour": "Brown",
+    "colour": "Lilac",
     "type": "property"
   },
   {
-    "name": "The Grand Tofu",
+    "name": "11 Inch Pizza",
     "price": 2,
-    "colour": "Red",
+    "colour": "Burgundy",
     "type": "property"
   },
   {
-    "name": "Lanzhou Beef Noodle",
+    "name": "Crust",
     "price": 2,
-    "colour": "Red",
+    "colour": "Burgundy",
     "type": "property"
   },
   {
-    "name": "Betty's Burgers",
+    "name": "D.O.C.",
     "price": 3,
-    "colour": "Green",
+    "colour": "Aqua",
     "type": "property"
   },
   {
-    "name": "YOMG",
+    "name": "Red Sparrow",
     "price": 3,
-    "colour": "Green",
+    "colour": "Aqua",
     "type": "property"
   },
   {
-    "name": "Gami Chicken",
+    "name": "Capitano",
     "price": 4,
-    "colour": "Blue",
+    "colour": "Navy",
     "type": "property"
   },
   {
-    "name": "Massizim",
+    "name": "+39 Pizzeria",
     "price": 4,
-    "colour": "Blue",
+    "colour": "Navy",
     "type": "property"
   }
 ]

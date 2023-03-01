@@ -7,6 +7,15 @@ def read_rolls(rolls_file)
   JSON.parse(serialized_rolls)
 end
 
+def print_results(board)
+  puts '------------------------------------'
+  board.results.each_with_index do |result, index|
+    print 'WINNER: ' if index.zero?
+    puts "#{result[:player]} has $#{result[:money]} and finished the game on #{result[:final_position]}"
+  end
+  puts '------------------------------------'
+end
+
 def simulate_game(rolls, board_string, players)
   board = Board.new(board_string, players)
   rolls.each do |roll|
@@ -15,10 +24,7 @@ def simulate_game(rolls, board_string, players)
 
     board.next_player
   end
-  board.results.each_with_index do |result, index|
-    print 'WINNER: ' if index.zero?
-    puts "#{result[:player]} has $#{result[:money]} and finished the game on #{result[:final_position]}"
-  end
+  print_results(board)
 end
 
 def run_game(rolls_file, players)
