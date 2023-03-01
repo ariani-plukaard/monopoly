@@ -34,6 +34,6 @@ def run_game(rolls_file, players)
 end
 
 rolls_file = ARGV[0]
-players = [{ name: 'Peter' }, { name: 'Billy' }, { name: 'Charlotte' }, { name: 'Sweedal' }]
+players = [{ name: 'Pooh' }, { name: 'Piglet' }, { name: 'Tigger' }, { name: 'Eeyore' }]
 
 run_game(rolls_file, players)
